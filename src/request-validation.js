@@ -22,4 +22,8 @@ export default function (schemas) {
             memo[schemaName] = createValidator(schema);
             return memo;
         }, {});
+
+    return (req, res, next) => {
+
+    };
 }
