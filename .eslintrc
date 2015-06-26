@@ -1,0 +1,23 @@
+// http://eslint.org/docs/rules
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "strict": 0,
+    "quotes": [2, "single"],
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
+    "no-unused-expressions": 0,
+    "new-cap": 0,
+    "no-extra-boolean-cast": 0,
+    "yoda": 0,
+    "no-use-before-define": 0
+  },
+  "globals": {
+    "expect": true,
+    "should": true
+  }
+}
