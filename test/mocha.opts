@@ -1,0 +1,6 @@
+--compilers js:babel/register
+--reporter spec
+--ui bdd
+--recursive
+--colors
+--timeout 60000

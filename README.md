@@ -1,5 +1,7 @@
 # is-express-schema-valid
 
+![](http://img.shields.io/badge/Status-Work%20In%20Progress-FA572C.svg?style=flat-square)
+
 > Endpoints schema validator of body, params and query middleware based on [JSONSchema](http://json-schema.org) and [is-my-json-valid](https://github.com/mafintosh/is-my-json-valid) module "that uses code generation to be extremely fast".
 
 ```bash
@@ -25,7 +27,7 @@ const loginSchema = {
         required: true,
         minLength: 1
     }
-}
+};
 
 app.post('/login',
     validate(loginSchema),
@@ -34,13 +36,13 @@ app.post('/login',
 app.use(handleErrors);
 
 function findAndLoginUser (req, res, next) {
-    // if schema validation falis 
-    // this middleware wont be called
+    // if schema validation fails 
+    // this middleware won't be called
 }
 
 function handleErrors (err, req, res, next) {
     // validation error will passed as first argument
-    // return it or match with your api responses
+    // you can return it or match with your api responses
 }
 
 app.listen(3000);
