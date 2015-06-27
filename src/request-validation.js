@@ -24,6 +24,14 @@ export default function (schemas) {
         }, {});
 
     return (req, res, next) => {
+        if (schemaValidators.params) {
 
+        }
+        if (schemaValidators.query) {
+
+        }
+        if (schemaValidators.payload) {
+
+        }
     };
 }

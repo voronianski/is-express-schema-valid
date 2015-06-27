@@ -46,6 +46,8 @@ function handleErrors (err, req, res, next) {
 app.listen(3000);
 ```
 
+## Built-in formats
+
 ---
 
 **MIT Licensed**
