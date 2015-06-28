@@ -16,8 +16,8 @@ class ValidationError extends Error {
 
 function _parseValidatorErrors (errors) {
     return errors.reduce((memo, error) => {
-        memo: {
-            name: 'ValidationError',
+        memo[error.field] = {
+            message: `${error.field} ${error.message}`,
             raw: error
         };
         return memo;

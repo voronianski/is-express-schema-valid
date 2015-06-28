@@ -2,7 +2,10 @@
 
 ![](http://img.shields.io/badge/Status-Work%20In%20Progress-FA572C.svg?style=flat-square)
 
-> Middleware to validate json schema of `req.body`, `req.params` and `req.query`. It is based on [JSONSchema](http://json-schema.org) spec and [is-my-json-valid](https://github.com/mafintosh/is-my-json-valid) _"that uses code generation to be extremely fast"_.
+[![npm version](http://badge.fury.io/js/is-express-schema-valid.svg)](http://badge.fury.io/js/is-express-schema-valid)
+[![Dependency Status](http://david-dm.org/voronianski/is-express-schema-valid.svg)](http://david-dm.org/voronianski/is-express-schema-valid)
+
+> Middleware to validate json schema of `req.body`, `req.params` and `req.query`. It is based on [JSONSchema](http://json-schema.org) spec and [is-my-json-valid](https://github.com/mafintosh/is-my-json-valid) that uses code generation to be extremely fast and is the [fastest](https://github.com/mafintosh/is-my-json-valid#performance) validator.
 
 ```bash
 npm install is-express-schema-valid --save
@@ -54,7 +57,7 @@ app.listen(3000);
 
 ## Defining schemas
 
-When defining a schema for request's payload/params/query you're able to pass a plain object. In this case `is-express-schema-valid` will automagically populate your schema with necessary properties:
+When defining a schema for request's payload/params/query you are able to pass a plain object. In this case `is-express-schema-valid` will automagically populate your schema with default `object` properties:
 
 ```javascript
 const schema = {
@@ -80,13 +83,13 @@ const schema = {
 // }
 ```
 
-Or you can use a full schema if default one doesn't match your needs, for example when payload needs to be an array or another type:
+In other cases when you different `type` then use a full schema. For example when payload needs to be an `array`:
 
 ```javascript
 const schema = {
     payload: {
         type: 'array',
-        "uniqueItems": true,
+        uniqueItems: true,
         items: {
             type: 'number'
         }
@@ -96,7 +99,7 @@ const schema = {
 // it will be used as is by validator
 ```
 
-## Built-in formats
+## Formats
 
 ## JSONSchema
 
