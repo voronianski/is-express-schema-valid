@@ -83,7 +83,7 @@ const schema = {
 // }
 ```
 
-In other cases when you different `type` then use a full schema. For example when payload needs to be an `array`:
+In other cases when you need a different `type` use a full schema. For example, when payload needs to be an `array`:
 
 ```javascript
 const schema = {

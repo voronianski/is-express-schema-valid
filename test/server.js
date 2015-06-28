@@ -2,50 +2,15 @@ import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import validate from '../src/is-express-schema-valid';
+import {
+    payloadObjSchema,
+    payloadNestedObjSchema,
+    payloadArrSchema,
+    mixedSchema,
+    paramsSchema
+} from './schemas';
 
 const app = express();
-
-const payloadObjSchema = {
-    payload: {
-        email: {
-            type: 'string',
-            format: 'email',
-            required: true
-        },
-        password: {
-            type: 'string',
-            required: true,
-            minLength: 1
-        }
-    }
-};
-
-const payloadNestedObjSchema = {
-    payload: {
-        name: {
-            type: 'string',
-            required: true
-        },
-        count: {
-            type: 'object',
-            properties: {
-                bar: {
-                    type: 'number'
-                }
-            }
-        }
-    }
-};
-
-const payloadArrSchema = {
-    payload: {
-        type: 'array',
-        uniqueItems: true,
-        items: {
-            type: 'number'
-        }
-    }
-};
 
 app.use(bodyParser.json());
 app.post('/payload/object',
@@ -60,6 +25,14 @@ app.post('/payload/array',
     validate(payloadArrSchema),
     returnSuccess
 );
+app.post('/mixed',
+    validate(mixedSchema),
+    returnSuccess
+);
+app.get('/params/:id',
+    validate(paramsSchema),
+    returnSuccess
+);
 app.use(handleErrors);
 
 function returnSuccess (req, res) {
@@ -67,13 +40,15 @@ function returnSuccess (req, res) {
 }
 
 function handleErrors (err, req, res, next) {
-    console.log(err);
     console.log(err.errors);
+    let status = err.statusCode || 500;
+    let errors = err.name === 'ValidationError' ? err.errors : {message: 'Internal Server Error'};
+
+    res.status(status).json({ errors });
 }
 
 export const port = 8765;
 
-// export function startServer (callback) {
-    http.createServer(app).listen(port, () => {});
-// }
-
+export function startServer (callback) {
+    http.createServer(app).listen(port, callback);
+}
