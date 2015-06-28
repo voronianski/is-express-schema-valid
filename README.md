@@ -56,7 +56,7 @@ function handleErrors (err, req, res, next) {
 app.listen(3000);
 ```
 
-## Defining schemas
+## Define schemas
 
 When defining a schema for request's payload/params/query you are able to pass a plain object. In this case `is-express-schema-valid` will automagically populate your schema with default `object` properties:
 
@@ -102,13 +102,13 @@ const schema = {
 
 ## Formats
 
-#### `mongo-object-id`
+##### `mongo-object-id`
 
 ## Errors
 
-## JSONSchema
+## Spec
 
-In order to get comfortable with JSON Schema spec and know its' additional features I advice you to check this book ["Understanding JSON Schema"](http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf) or look at [examples](http://json-schema.org/examples.html).
+In order to get comfortable with JSONSchema spec and know its' additional features I advice you to check this book ["Understanding JSON Schema"](http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf) or look at [examples](http://json-schema.org/examples.html).
 
 ### To Do
 
