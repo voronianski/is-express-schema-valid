@@ -4,7 +4,9 @@
 [![npm version](http://badge.fury.io/js/is-express-schema-valid.svg)](http://badge.fury.io/js/is-express-schema-valid)
 [![Dependency Status](http://david-dm.org/voronianski/is-express-schema-valid.svg)](http://david-dm.org/voronianski/is-express-schema-valid)
 
-> Middleware to validate json schema of `req.body`, `req.params` and `req.query`. It is based on [JSONSchema](http://json-schema.org) spec and [is-my-json-valid](https://github.com/mafintosh/is-my-json-valid) that uses code generation to be extremely fast and is the [fastest](https://github.com/mafintosh/is-my-json-valid#performance) validator.
+> Middleware to validate json schema of `req.body`, `req.params` and `req.query`. It is based on [JSONSchema](http://json-schema.org) spec and [is-my-json-valid](https://github.com/mafintosh/is-my-json-valid) that uses code generation to be extremely fast.
+
+## Install
 
 ```bash
 npm install is-express-schema-valid --save
@@ -99,6 +101,10 @@ const schema = {
 ```
 
 ## Formats
+
+#### `mongo-object-id`
+
+## Errors
 
 ## JSONSchema
 
