@@ -20,7 +20,7 @@ describe('is-express-schema-valid middleware', () => {
             it('should do what...');
         });
 
-        describe('when sending fields that are not schema', () => {
+        describe('when sending fields that are not in schema', () => {
             it('should do what...');
         });
 
