@@ -101,6 +101,12 @@ describe('is-express-schema-valid middleware', () => {
     });
 
     describe('when requesting with valid schema', () => {
-        it('should do what...');
+            it('should return success', done => {
+                request
+                    .post('/payload/object')
+                    .send({email: 'john.doe@example.com', password: 'qwerty'})
+                    .expect(200)
+                    .end(done);
+            });
     });
 });

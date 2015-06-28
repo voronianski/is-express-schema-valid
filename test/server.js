@@ -40,7 +40,6 @@ function returnSuccess (req, res) {
 }
 
 function handleErrors (err, req, res, next) {
-    console.log(err.errors);
     let status = err.statusCode || 500;
     let errors = err.name === 'ValidationError' ? err.errors : {message: 'Internal Server Error'};
 
