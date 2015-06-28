@@ -14,19 +14,22 @@ class ValidationError extends Error {
     }
 }
 
-function _parseValidatorErrors (errors) {
-    return errors.reduce((memo, error) => {
-        memo[error.field] = {
-            message: `${error.field} ${error.message}`,
-            raw: error
-        };
-        return memo;
-    }, {});
-}
 
-function _createValidator (schema) {
+
+function _createValidator (schema, schemaName) {
     if (!schema || typeof schema !== 'object') {
         throw new Error('Schema object is required for validator');
+    }
+
+    function parseValidatorErrors (errors) {
+        return errors.reduce((memo, error) => {
+            let [ data ] = error.field.split('.');
+            memo[error.field] = {
+                message: `${error.field} ${error.message}`,
+                raw: error
+            };
+            return memo;
+        }, {});
     }
 
     return (data, errors) => {
@@ -36,7 +39,7 @@ function _createValidator (schema) {
         let validatedData = validator(data);
 
         if (!validatedData) {
-            errors.push(_parseValidatorErrors(validator.errors));
+            errors.push(parseValidatorErrors(validator.errors));
         }
     };
 }
@@ -48,7 +51,7 @@ function requestValidator (schemas) {
         })
         .reduce((memo, schemaName) => {
             memo[schemaName] = {
-                validate: _createValidator(schemas[schemaName])
+                validate: _createValidator(schemas[schemaName], schemaName)
             };
             return memo;
         }, {});

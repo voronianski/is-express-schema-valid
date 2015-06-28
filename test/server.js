@@ -20,6 +20,23 @@ const payloadObjSchema = {
     }
 };
 
+const payloadNestedObjSchema = {
+    payload: {
+        name: {
+            type: 'string',
+            required: true
+        },
+        count: {
+            type: 'object',
+            properties: {
+                bar: {
+                    type: 'number'
+                }
+            }
+        }
+    }
+};
+
 const payloadArrSchema = {
     payload: {
         type: 'array',
@@ -33,6 +50,10 @@ const payloadArrSchema = {
 app.use(bodyParser.json());
 app.post('/payload/object',
     validate(payloadObjSchema),
+    returnSuccess
+);
+app.post('/payload/object/nested',
+    validate(payloadNestedObjSchema),
     returnSuccess
 );
 app.post('/payload/array',
