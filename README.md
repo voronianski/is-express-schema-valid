@@ -18,9 +18,9 @@ npm install is-express-schema-valid --save
 
 Create schema validation middleware using the specified keys for each type of request data:
 
-- `req.body` validated by `payload` schema object
-- `req.params` validated by `params` schema object
-- `req.query` validated by `query` schema object
+- `req.body` is validated by `payload` schema object
+- `req.params` is validated by `params` schema object
+- `req.query` is validated by `query` schema object
 
 ### Example
 
@@ -128,12 +128,12 @@ const schema = {
 
 Just a reminder that there are default formats supported by JSONSchema:
 
-- `"date-time"` - date representation, as defined by RFC 3339, section 5.6.
-- `"email"` - internet email address, see RFC 5322, section 3.4.1.
-- `"hostname"` - internet host name, see RFC 1034, section 3.1.
-- `"ipv4"` - IPv4 address, according to dotted-quad ABNF syntax as defined in RFC 2673, section 3.2.
-- `"ipv6"` - IPv6 address, as defined in RFC 2373, section 2.2.
-- `"uri"` - a universal resource identifier (URI), according to RFC3986.
+- `"date-time"` - date representation, as defined by [RFC 3339, section 5.6](http://tools.ietf.org/html/rfc3339).
+- `"email"` - internet email address, see [RFC 5322, section 3.4.1](http://tools.ietf.org/html/rfc5322).
+- `"hostname"` - internet host name, see [RFC 1034, section 3.1](http://tools.ietf.org/html/rfc1034).
+- `"ipv4"` - IPv4 address, according to dotted-quad ABNF syntax as defined in [RFC 2673, section 3.2](http://tools.ietf.org/html/rfc2673).
+- `"ipv6"` - IPv6 address, as defined in [RFC 2373, section 2.2](http://tools.ietf.org/html/rfc2373).
+- `"uri"` - a universal resource identifier (URI), according to [RFC3986](http://tools.ietf.org/html/rfc3986).
 
 ### Errors
 
