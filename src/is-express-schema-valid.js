@@ -1,4 +1,5 @@
 import createValidator from 'is-my-json-valid';
+import uniqueBy from 'unique-by';
 
 const defaultSchemas = ['payload', 'query', 'params'];
 const schemaPattern = {type: 'object', required: true, additionalProperties: false};
@@ -25,7 +26,9 @@ function _createValidator (schema, schemaName, options) {
     options = options || {};
 
     function parseValidatorErrors (errors) {
-        return errors.map(error => {
+        return uniqueBy(errors, (obj) => {
+            return obj.message && obj.field;
+        }).map(error => {
             let key = error.field.split(/\.(.+)/)[1];
             let err = {};
 

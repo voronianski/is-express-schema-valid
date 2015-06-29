@@ -57,7 +57,7 @@ describe('is-express-schema-valid middleware', () => {
             it('should return proper error', done => {
                 request
                     .post('/payload/object')
-                    .send({foo: 'bar'})
+                    .send({foo: 'bar', bar: 'foo'})
                     .expect(400)
                     .expect(res => {
                         expect(res.body.errors).to.be.an('object');
