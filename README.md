@@ -112,7 +112,7 @@ const schema = {
 
 ### Formats
 
-There several additional formats added for easy validating the requests:
+There are several additional formats added for easy validating the requests:
 
 - `"mongo-object-id"` - check if the string is a valid hex-encoded representation of a [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/)
 - `"alpha"` - check if the string contains only letters (a-zA-Z)
