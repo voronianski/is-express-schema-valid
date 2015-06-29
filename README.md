@@ -142,7 +142,7 @@ app.get('/items/:id',
 );
 ```
 
-Just a reminder that there are default formats supported by JSONSchema:
+Just a reminder that there are default **built-in formats** supported by JSONSchema:
 
 - `"date-time"` - date representation, as defined by [RFC 3339, section 5.6](http://tools.ietf.org/html/rfc3339).
 - `"email"` - internet email address, see [RFC 5322, section 3.4.1](http://tools.ietf.org/html/rfc5322).
