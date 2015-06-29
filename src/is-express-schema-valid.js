@@ -6,10 +6,10 @@ const customFormats = {
     'mongo-object-id': /^[a-fA-F0-9]{24}$/i
 };
 
-class ValidationError extends Error {
+class SchemaValidationError extends Error {
     constructor(errorsObj) {
         super();
-        this.name = 'ValidationError';
+        this.name = 'SchemaValidationError';
         this.statusCode = 400;
         this.statusText = 'Bad Request';
         this.errors = errorsObj;
@@ -86,7 +86,7 @@ function requestValidator (schemas, options) {
         }
 
         if (Object.keys(errorsObj).length > 0) {
-            return next(new ValidationError(errorsObj));
+            return next(new SchemaValidationError(errorsObj));
         }
 
         next();
@@ -98,5 +98,6 @@ function responseValidator () {} // TBD in next version
 let defaultValidator = requestValidator;
 defaultValidator.req = requestValidator;
 defaultValidator.res = responseValidator;
+defaultValidator.SchemaValidationError = SchemaValidationError;
 
 export default defaultValidator;
