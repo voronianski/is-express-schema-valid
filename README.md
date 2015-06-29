@@ -12,7 +12,17 @@
 npm install is-express-schema-valid --save
 ```
 
-## Example
+## Usage
+
+### `isExpressSchemaValid({ payload, query, params })`
+
+Create schema validation middleware using the specified keys for each type of request data:
+
+- `req.body` validated by `payload` schema object
+- `req.params` validated by `params` schema object
+- `req.query` validated by `query` schema object
+
+### Example
 
 ```javascript
 import express from 'express';
@@ -49,18 +59,16 @@ function findAndLoginUser (req, res, next) {
 }
 
 function handleErrors (err, req, res, next) {
-    // validation error will passed as first argument
+    // validation error will be passed as first argument
     // you can return it or match with your api responses
 }
 
 app.listen(3000);
 ```
 
-## Usage
-
 ### Define schemas
 
-When defining a schema for request's payload/params/query you are able to pass a plain object. In this case `is-express-schema-valid` will automagically populate your schema with default `object` properties:
+When defining a schema for request's payload / params / query you are able to pass a plain object. In this case `is-express-schema-valid` will automagically populate your schema with default `object` properties:
 
 ```javascript
 const schema = {
@@ -104,17 +112,49 @@ const schema = {
 
 ### Formats
 
-##### `mongo-object-id`
+##### `"mongo-object-id"`
+
+##### `"alpha"`
+
+##### `"alphanumeric"`
+
+##### `"numeric"`
+
+##### `"hexadecimal"`
+
+##### `"hexcolor"`
+
+##### `"base64"`
+
+Just a reminder that there are default formats supported by JSONSchema:
+
+- `"date-time"` - date representation, as defined by RFC 3339, section 5.6.
+- `"email"` - internet email address, see RFC 5322, section 3.4.1.
+- `"hostname"` - internet host name, see RFC 1034, section 3.1.
+- `"ipv4"` - IPv4 address, according to dotted-quad ABNF syntax as defined in RFC 2673, section 3.2.
+- `"ipv6"` - IPv6 address, as defined in RFC 2373, section 2.2.
+- `"uri"` - a universal resource identifier (URI), according to RFC3986.
 
 ### Errors
 
-## Spec
+If provided data doesn't match provided schema _is-express-schema-valid_ middleware passes instance of `SchemaValidationError` class down to your app's error handler middleware:
 
-In order to get comfortable with JSONSchema spec and know its' additional features I advice you to check this book ["Understanding JSON Schema"](http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf) or look at [examples](http://json-schema.org/examples.html).
+```javascript
+import { SchemaValidationError } from 'is-express-schema-valid';
 
-## To Do
+function errorHandlerMiddleware (err, req, res, next) {
+    // handle schema validation error
+    if (err instanceof SchemaValidationError) {
+        // check lists of errors for each schema
+        console.log(err.errors);
+        // { payload: [...], query: [...], params: [...] }
+    }
+}
+```
 
-- [ ] Response schemas
+## JSONSchema
+
+In order to get comfortable with [JSONSchema spec](http://json-schema.org) and its' features I advice you to check the book ["Understanding JSON Schema"](http://spacetelescope.github.io/understanding-json-schema) (also [PDF](http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf) version) or look at [examples](http://json-schema.org/examples.html).
 
 ---
 

@@ -40,7 +40,7 @@ function returnSuccess (req, res) {
 }
 
 function handleErrors (err, req, res, next) {
-    let status = err.statusCode || 500;
+    let status = err.name === 'SchemaValidationError' ? 400 : err.status || 500;
     let errors = err.name === 'SchemaValidationError' ? err.errors : {message: 'Internal Server Error'};
 
     res.status(status).json({ errors });

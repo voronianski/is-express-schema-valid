@@ -4,15 +4,19 @@ import uniqueBy from 'unique-by';
 const defaultSchemas = ['payload', 'query', 'params'];
 const schemaPattern = {type: 'object', required: true, additionalProperties: false};
 const customFormats = {
-    'mongo-object-id': /^[a-fA-F0-9]{24}$/i
+    'mongo-object-id': /^[a-fA-F0-9]{24}$/i,
+    'alpha': /^[A-Z]+$/i,
+    'alphanumeric': /^[0-9A-Z]+$/i,
+    'numeric': /^[-+]?[0-9]+$/,
+    'hexadecimal': /^[0-9A-F]+$/i,
+    'hexcolor': /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i,
+    'base64': /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i
 };
 
 class SchemaValidationError extends Error {
     constructor(errorsObj) {
         super();
         this.name = 'SchemaValidationError';
-        this.statusCode = 400;
-        this.statusText = 'Bad Request';
         this.errors = errorsObj;
         Error.captureStackTrace(this);
     }
