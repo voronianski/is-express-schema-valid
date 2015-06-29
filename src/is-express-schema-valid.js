@@ -27,14 +27,14 @@ function _createValidator (schema, schemaName, options) {
     function parseValidatorErrors (errors) {
         return errors.map(error => {
             let key = error.field.split(/\.(.+)/)[1];
-            let line = key || `${schemaName} data`;
             let err = {};
 
             if (key) {
                 err.key = key;
+                err.message = error.message;
+            } else {
+                err.message = `${schemaName} data ${error.message}`;
             }
-
-            err.message = `${line} ${error.message}`;
 
             if (options.debug) {
                 err._raw = error;
