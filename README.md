@@ -112,19 +112,55 @@ const schema = {
 
 ### Formats
 
-##### `"mongo-object-id"`
+There several additional formats added for easy validating the requests:
+
+##### `"mongo-object-id"` 
+
+Check if the string is a valid hex-encoded representation of a [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/).
 
 ##### `"alpha"`
 
+Check if the string contains only letters (a-zA-Z).
+
 ##### `"alphanumeric"`
+
+Check if the string contains only letters and numbers.
 
 ##### `"numeric"`
 
+Check if the string contains only numbers.
+
 ##### `"hexadecimal"`
+
+Check if the string is a hexadecimal number.
 
 ##### `"hexcolor"`
 
+Check if the string is a hexadecimal color.
+
 ##### `"base64"`
+
+Check if a string is [Base64](https://en.wikipedia.org/wiki/Base64) encoded.
+
+In the example below we can ensure that id passed as param is valid MongoDB ObjectId: 
+
+```javascript
+import validate from 'is-express-schema-valid';
+
+const schema = {
+    params: {
+        id: {
+            type: 'string',
+            format: 'mongo-object-id'
+        }
+    }
+};
+
+app.get('/items/:id',
+    validate(schema) 
+    //...
+);
+```
 
 Just a reminder that there are default formats supported by JSONSchema:
 
