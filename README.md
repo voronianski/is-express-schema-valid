@@ -114,35 +114,15 @@ const schema = {
 
 There several additional formats added for easy validating the requests:
 
-##### `"mongo-object-id"` 
+- `"mongo-object-id"` - check if the string is a valid hex-encoded representation of a [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/)
+- `"alpha"` - check if the string contains only letters (a-zA-Z)
+- `"alphanumeric"` - check if the string contains only letters and numbers
+- `"numeric"` - check if the string contains only numbers
+- `"hexadecimal"` - check if the string is a hexadecimal number
+- `"hexcolor"` - check if the string is a hexadecimal color
+- `"base64"` - check if a string is [Base64](https://en.wikipedia.org/wiki/Base64) encoded
 
-Check if the string is a valid hex-encoded representation of a [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/).
-
-##### `"alpha"`
-
-Check if the string contains only letters (a-zA-Z).
-
-##### `"alphanumeric"`
-
-Check if the string contains only letters and numbers.
-
-##### `"numeric"`
-
-Check if the string contains only numbers.
-
-##### `"hexadecimal"`
-
-Check if the string is a hexadecimal number.
-
-##### `"hexcolor"`
-
-Check if the string is a hexadecimal color.
-
-##### `"base64"`
-
-Check if a string is [Base64](https://en.wikipedia.org/wiki/Base64) encoded.
-
-In the example below we can ensure that id passed as param is valid MongoDB ObjectId: 
+In the example below we can ensure that id passed as param is valid [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/): 
 
 ```javascript
 import validate from 'is-express-schema-valid';
