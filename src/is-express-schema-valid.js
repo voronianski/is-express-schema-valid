@@ -10,7 +10,8 @@ const customFormats = {
     'numeric': /^[-+]?[0-9]+$/,
     'hexadecimal': /^[0-9A-F]+$/i,
     'hexcolor': /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i,
-    'base64': /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i
+    'base64': /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i,
+    'uuid': /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
 };
 
 class SchemaValidationError extends Error {
