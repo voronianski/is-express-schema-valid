@@ -122,7 +122,7 @@ There are several additional formats added for easy validating the requests:
 - `"hexadecimal"` - check if the string is a hexadecimal number
 - `"hexcolor"` - check if the string is a hexadecimal color
 - `"base64"` - check if a string is [Base64](https://en.wikipedia.org/wiki/Base64) encoded
-- `"uuid"` - check if the string is a [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+- `"uuid"` - check if the string is [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 
 In the example below we can ensure that id passed as param is valid [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/): 
 
