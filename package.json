@@ -1,6 +1,6 @@
 {
   "name": "is-express-schema-valid",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Express.js middleware that validates body, params, query of request according to JSONSchema and is extremely fast",
   "main": "index.js",
   "scripts": {
