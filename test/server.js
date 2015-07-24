@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import validate from '../src/is-express-schema-valid';
 import {
     payloadObjSchema,
+    payloadObjSchemaWithReadonly,
     payloadNestedObjSchema,
     payloadArrSchema,
     mixedSchema,
@@ -16,6 +17,10 @@ app.use(bodyParser.json());
 app.post('/payload/object',
     validate(payloadObjSchema),
     returnSuccess
+);
+app.post('/payload/object/filterReadonly',
+    validate(payloadObjSchemaWithReadonly, { filterReadonly: true }),
+    returnBody
 );
 app.post('/payload/object/nested',
     validate(payloadNestedObjSchema),
@@ -37,6 +42,10 @@ app.use(handleErrors);
 
 function returnSuccess (req, res) {
     res.status(200).end();
+}
+
+function returnBody (req, res) {
+    res.json(req.body);
 }
 
 function handleErrors (err, req, res, next) {
