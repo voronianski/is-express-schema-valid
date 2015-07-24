@@ -13,6 +13,25 @@ export const payloadObjSchema = {
     }
 };
 
+export const payloadObjSchemaWithReadonly = {
+    payload: {
+        email: {
+            type: 'string',
+            format: 'email',
+            required: true
+        },
+        password: {
+            type: 'string',
+            required: true,
+            minLength: 1
+        },
+        secret: {
+            type: 'string',
+            readonly: true
+        }
+    }
+};
+
 export const payloadNestedObjSchema = {
     payload: {
         name: {

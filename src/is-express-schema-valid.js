@@ -1,4 +1,5 @@
 import createValidator from 'is-my-json-valid';
+import traverse from 'traverse';
 import uniqueBy from 'unique-by';
 
 const defaultSchemas = ['payload', 'query', 'params'];
@@ -61,6 +62,21 @@ function _createValidator (schema, schemaName, options) {
 
         if (!validatedData) {
             errors[schemaName] = parseValidatorErrors(validator.errors);
+        }
+
+        if (validatedData && options.filterReadonly) {
+            let readonlyProerties = traverse(schemaToValidate).reduce(function (memo, value) {
+                if (this.key === 'readonly' && value === true) {
+                    memo.push(this.parent.key);
+                }
+                return memo;
+            }, []);
+
+            traverse(data).forEach(function (value) {
+                if (readonlyProerties.indexOf(this.key) !== -1) {
+                    this.remove();
+                }
+            });
         }
     };
 }
