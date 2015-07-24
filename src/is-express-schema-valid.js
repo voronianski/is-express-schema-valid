@@ -65,7 +65,7 @@ function _createValidator (schema, schemaName, options) {
         }
 
         if (validatedData && options.filterReadonly) {
-            let readonlyProerties = traverse(schemaToValidate).reduce(function (memo, value) {
+            let readonlyProperties = traverse(schemaToValidate).reduce(function (memo, value) {
                 if (this.key === 'readonly' && value === true) {
                     memo.push(this.parent.key);
                 }
@@ -73,7 +73,7 @@ function _createValidator (schema, schemaName, options) {
             }, []);
 
             traverse(data).forEach(function (value) {
-                if (readonlyProerties.indexOf(this.key) !== -1) {
+                if (readonlyProperties.indexOf(this.key) !== -1) {
                     this.remove();
                 }
             });
