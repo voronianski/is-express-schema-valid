@@ -15,13 +15,18 @@ npm install is-express-schema-valid --save
 
 ## Usage
 
-### `isExpressSchemaValid({ payload, query, params })`
+### `isExpressSchemaValid({ payload, query, params }, options)`
 
 Create schema validation middleware using the specified keys for each type of request data:
 
-- `req.body` is validated by `payload` schema object
-- `req.params` is validated by `params` schema object
-- `req.query` is validated by `query` schema object
+- `payload` schema object validates `req.body`
+- `params` schema object validates `req.params` 
+- `query` schema object validates `req.query`
+
+### Options
+
+- `filter` - filter away fields that are not in the schema, defaults to `false`
+- `filterReadonly` - filter away fields that are marked as `readonly: true` in schema, defaults to `false`
 
 ### Example
 
@@ -122,6 +127,9 @@ There are several additional formats added for easy validating the requests:
 - `"hexadecimal"` - check if the string is a hexadecimal number
 - `"hexcolor"` - check if the string is a hexadecimal color
 - `"base64"` - check if a string is [Base64](https://en.wikipedia.org/wiki/Base64) encoded
+- `"decimal"` - check if a string is a decimal number, such as 0.1, .3, 1.1, 1.00003, 4.0, etc.
+- `"int"` - check if a string is an integer
+- `"float"` - check if a string is a float
 - `"uuid"` - check if the string is [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 
 In the example below we can ensure that id passed as param is valid [MongoDB ObjectId](http://docs.mongodb.org/manual/reference/object-id/): 
