@@ -1,6 +1,6 @@
 {
   "name": "is-express-schema-valid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Express.js middleware that validates body, params, query of request according to JSONSchema and is extremely fast",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "homepage": "https://github.com/voronianski/is-express-schema-valid#readme",
   "dependencies": {
     "error-class": "^2.0.0",
-    "is-my-schema-valid": "^1.0.0"
+    "is-my-schema-valid": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",

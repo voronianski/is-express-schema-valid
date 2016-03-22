@@ -101,26 +101,26 @@ describe('is-express-schema-valid middleware', () => {
     });
 
     describe('when requesting with valid schema', () => {
-            it('should return success', done => {
-                request
-                    .post('/payload/object')
-                    .send({email: 'john.doe@example.com', password: 'qwerty'})
-                    .expect(200)
-                    .end(done);
-            });
+        it('should return success', done => {
+            request
+                .post('/payload/object')
+                .send({email: 'john.doe@example.com', password: 'qwerty'})
+                .expect(200)
+                .end(done);
+        });
     });
 
     describe('when requesting with valid schema with filterReadonly option', () => {
-            it('should return success', done => {
-                request
-                    .post('/payload/object/filterReadonly')
-                    .send({email: 'john.doe@example.com', password: 'qwerty', secret: 'secret'})
-                    .expect(200)
-                    .expect(res => {
-                        expect(res.body).to.not.have.property('secret');
-                        expect(res.body).to.deep.equal({email: 'john.doe@example.com', password: 'qwerty'});
-                    })
-                    .end(done);
-            });
+        it('should return success', done => {
+            request
+                .post('/payload/object/filterReadonly')
+                .send({email: 'john.doe@example.com', password: 'qwerty', secret: 'secret'})
+                .expect(200)
+                .expect(res => {
+                    expect(res.body).to.not.have.property('secret');
+                    expect(res.body).to.deep.equal({email: 'john.doe@example.com', password: 'qwerty'});
+                })
+                .end(done);
+        });
     });
 });

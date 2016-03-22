@@ -6,6 +6,8 @@ const defaultSchemas = ['payload', 'query', 'params'];
 const SchemaValidationError = errorClass('SchemaValidationError');
 
 function createValidator (schemaName, schema, options) {
+    schema.title = schemaName;
+
     return (data, errors) => {
         const result = validate(data, schema, options);
 
