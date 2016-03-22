@@ -1,90 +1,16 @@
-import createValidator from 'is-my-json-valid';
-import traverse from 'traverse';
-import uniqueBy from 'unique-by';
+import validate from 'is-my-schema-valid';
+import errorClass from 'error-class';
 
 const defaultSchemas = ['payload', 'query', 'params'];
-const schemaPattern = {type: 'object', required: true, additionalProperties: false};
-const customFormats = {
-    'mongo-object-id': /^[a-fA-F0-9]{24}$/i,
-    'alpha': /^[A-Z]+$/i,
-    'alphanumeric': /^[0-9A-Z]+$/i,
-    'numeric': /^[-+]?[0-9]+$/,
-    'hexadecimal': /^[0-9A-F]+$/i,
-    'hexcolor': /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i,
-    'decimal': /^[-+]?([0-9]+|\.[0-9]+|[0-9]+\.[0-9]+)$/,
-    'float': /^(?:[-+]?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/,
-    'int': /^(?:[-+]?(?:0|[1-9][0-9]*))$/,
-    'base64': /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i,
-    'uuid': /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
-};
 
-class SchemaValidationError extends Error {
-    constructor(errorsObj) {
-        super();
-        this.name = 'SchemaValidationError';
-        this.errors = errorsObj;
-        Error.captureStackTrace(this);
-    }
-}
+const SchemaValidationError = errorClass('SchemaValidationError');
 
-function _createValidator (schema, schemaName, options) {
-    if (!schema || typeof schema !== 'object') {
-        throw new Error('Schema object is required for validator');
-    }
-
-    options = options || {};
-
-    function parseValidatorErrors (errors) {
-        return uniqueBy(errors, (obj) => {
-            return obj.message && obj.field;
-        }).map(error => {
-            let key = error.field.split(/\.(.+)/)[1];
-            let err = {};
-
-            if (key) {
-                err.key = key;
-                err.message = error.message;
-            } else {
-                err.message = `${schemaName} data ${error.message}`;
-            }
-
-            if (options.debug) {
-                err._raw = error;
-            }
-
-            return err;
-        });
-    }
-
+function createValidator (schemaName, schema, options) {
     return (data, errors) => {
-        let schemaToValidate = schema.type ? schema : Object.assign({}, schemaPattern, {properties: schema});
-        let formats = options.formats ? Object.assign({}, customFormats, options.formats) : customFormats;
-        let validator = createValidator(schemaToValidate, { formats });
+        const result = validate(data, schema, options);
 
-        if (options.filter) {
-            let filter = createValidator.filter(schemaToValidate);
-            data = filter(data);
-        }
-
-        let validatedData = validator(data);
-
-        if (!validatedData) {
-            errors[schemaName] = parseValidatorErrors(validator.errors);
-        }
-
-        if (validatedData && options.filterReadonly) {
-            let readonlyProperties = traverse(schemaToValidate).reduce(function (memo, value) {
-                if (this.key === 'readonly' && value === true) {
-                    memo.push(this.parent.key);
-                }
-                return memo;
-            }, []);
-
-            traverse(data).forEach(function () {
-                if (readonlyProperties.indexOf(this.key) !== -1) {
-                    this.remove();
-                }
-            });
+        if (!result.valid) {
+            errors[schemaName] = result.errors;
         }
     };
 }
@@ -96,7 +22,7 @@ function requestValidator (schemas, options) {
         })
         .reduce((memo, schemaName) => {
             memo[schemaName] = {
-                validate: _createValidator(schemas[schemaName], schemaName, options)
+                validate: createValidator(schemaName, schemas[schemaName], options)
             };
             return memo;
         }, {});
@@ -118,7 +44,9 @@ function requestValidator (schemas, options) {
         }
 
         if (Object.keys(errorsObj).length > 0) {
-            return next(new SchemaValidationError(errorsObj));
+            const schemaValidationError = new SchemaValidationError();
+            schemaValidationError.errors = errorsObj;
+            return next(schemaValidationError);
         }
 
         next();
