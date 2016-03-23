@@ -1,6 +1,6 @@
 # is-express-schema-valid
 
-[![build status](http://img.shields.io/travis/voronianski/is-express-schema-valid.svg?style=flat)](https://travis-ci.org/voronianski/is-express-schema-valid.js)
+[![build status](http://img.shields.io/travis/voronianski/is-express-schema-valid.svg?style=flat)](https://travis-ci.org/voronianski/is-express-schema-valid)
 [![npm version](http://badge.fury.io/js/is-express-schema-valid.svg)](http://badge.fury.io/js/is-express-schema-valid)
 [![Dependency Status](http://david-dm.org/voronianski/is-express-schema-valid.svg)](http://david-dm.org/voronianski/is-express-schema-valid)
 [![Download Count](http://img.shields.io/npm/dm/is-express-schema-valid.svg?style=flat)](http://www.npmjs.com/package/is-express-schema-valid)
