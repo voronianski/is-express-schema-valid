@@ -30,7 +30,7 @@
   "homepage": "https://github.com/voronianski/is-express-schema-valid#readme",
   "dependencies": {
     "error-class": "^2.0.0",
-    "is-my-schema-valid": "^1.0.1"
+    "is-my-schema-valid": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -46,7 +46,6 @@
     "estraverse": "^4.2.0",
     "estraverse-fb": "^1.3.1",
     "express": "^4.13.0",
-    "is-my-schema-valid": "^1.0.2",
     "mocha": "^2.2.5",
     "supertest": "^1.0.1"
   }
