@@ -5,7 +5,7 @@
 [![Dependency Status](http://david-dm.org/voronianski/is-express-schema-valid.svg)](http://david-dm.org/voronianski/is-express-schema-valid)
 [![Download Count](http://img.shields.io/npm/dm/is-express-schema-valid.svg?style=flat)](http://www.npmjs.com/package/is-express-schema-valid)
 
-> Middleware to validate json schema of `req.body`, `req.params` and `req.query`. It is based on [JSONSchema](http://json-schema.org) spec and [is-my-json-valid](https://github.com/mafintosh/is-my-json-valid) that uses code generation to be extremely fast.
+> Middleware to validate json schema of `req.body`, `req.params` and `req.query`. It is based on [JSONSchema](http://json-schema.org) spec and [is-my-schema-valid](https://github.com/voronianski/is-my-schema-valid) module.
 
 ## Install
 
